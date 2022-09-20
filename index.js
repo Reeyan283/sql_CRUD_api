@@ -19,7 +19,10 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
-test.delete();
+test.create();
+//test.read();
+//test.update();
+//test.delete();
 
 /*
  * Api stuff

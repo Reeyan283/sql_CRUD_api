@@ -36,7 +36,6 @@ class queryBuilder {
         })
 
         let query = a.substring(0, a.length-2) + " " + b;
-        console.log(query);
         return query;
     }
 
@@ -47,10 +46,14 @@ class queryBuilder {
             query += (typeof values[key] == "string") ? `"${values[key]}", ` : `${values[key]}, `;
         }
         query = query.substring(0, query.length-2) + " WHERE ";
-        for (let key in conditions) {
-            query+=`\`${key}\` = `;
-            query += (typeof conditions[key] == "string") ? `"${conditions[key]}", ` : `${conditions[key]}, `;
-        }
+        conditions.forEach((condition) => {
+            let args = condition.split(" ");
+            let column = args[0];
+            let operator = args[1];
+            let value = args[2];
+            query+=`\`${column}\` ${operator}  `;
+            query += (typeof value == "string") ? `"${value}", ` : `${value}, `;
+        });
         query = query.substring(0, query.length-2) + ";";
 
         return query;
@@ -58,10 +61,14 @@ class queryBuilder {
 
     delete (table, conditions) {
         let query = `DELETE FROM ${table} WHERE `;
-        for (let key in conditions) {
-            query+=`\`${key}\` = `;
-            query += (typeof conditions[key] == "string") ? `"${conditions[key]}", ` : `${conditions[key]}, `;
-        }
+        conditions.forEach((condition) => {
+            let args = condition.split(" ");
+            let column = args[0];
+            let operator = args[1];
+            let value = args[2];
+            query+=`\`${column}\` ${operator}  `;
+            query += (typeof value == "string") ? `"${value}", ` : `${value}, `;
+        });
         query = query.substring(0, query.length-2) + ";";
 
         return query;

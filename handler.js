@@ -22,10 +22,9 @@ exports.create = (req, res, connection) => {
 
     const query = new queryBuilder().insert(table, values); 
     connection.query(query, (err, results) => {
-        return console.log(results);
         if (err) return res.status(400).send(err);
 
-        return res.status(200).send(results[0]);
+        return res.status(200).send(results);
     });
 
 };
@@ -55,7 +54,7 @@ exports.read = (req, res, connection) => {
     connection.query(query, (err, results) => {
         if (err) return res.status(400).send(err);
 
-        return res.status(200).send(results[0]);
+        return res.status(200).send(results);
     });
 }
 
@@ -89,7 +88,7 @@ exports.update = (req, res, connection) => {
     connection.query(query, (err, results) => {
         if (err) return res.status(400).send(err);
 
-        return res.status(200).send(results[0]);
+        return res.status(200).send(results);
     });
        
 }
@@ -118,7 +117,7 @@ exports.delete = (req, res, connection) => {
     connection.query(query, (err, results) => {
         if (err) return res.status(400).send(err);
 
-        return res.status(200).send(results[0]);
+        return res.status(200).send(results);
     });
        
 }
