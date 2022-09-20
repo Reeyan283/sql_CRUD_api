@@ -22,6 +22,38 @@ class queryBuilder {
 
         return a.substring(0, a.length-2) + (b.substring(0, b.length-2)) + ");";
     }
+
+    select(table, columns) {
+        let a = `SELECT `;
+        let b = `FROM ${table};`;
+
+        if (typeof columns == "string") {
+            columns = [columns]
+        }
+
+        columns.forEach((column) => {
+            a+=`${column}, `;
+        })
+
+        let query = a.substring(0, a.length-2) + " " + b;
+        console.log(query);
+        return query;
+    }
+
+    update(table, values, conditions) {
+        let query = `UPDATE ${table} SET `;
+        for (let key in values) {
+            query+=`\`${key}\` = ${values[key]}, `;
+        }
+        query = query.substring(0, query.length-2) + " WHERE ";
+        for (let key in conditions) {
+            query+=`\`${key}\` = ${conditions[key]}, `;
+            
+        }
+        query = query.substring(0, query.length-2) + ";";
+
+        return console.log(query);
+    }
 }
 
 module.exports = queryBuilder;

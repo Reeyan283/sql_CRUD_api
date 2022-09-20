@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
-test.insert();
+test.update();
 
 /*
  * Api stuff
@@ -27,8 +27,10 @@ test.insert();
 
 const app = express();
 
-app.use(express.urlencoded({ xtended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.listen(properties.port);
 
 app.post(properties.paths.create, (req, res)=>{handler.create(req, res, connection)});
+app.post(properties.paths.read, (req, res)=>{handler.read(req, res, connection)});
+app.post(properties.paths.update, (req, res)=>{handler.update(req, res, connection)});
