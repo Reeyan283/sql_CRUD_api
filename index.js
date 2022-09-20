@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
-test.update();
+test.delete();
 
 /*
  * Api stuff
@@ -34,3 +34,4 @@ app.listen(properties.port);
 app.post(properties.paths.create, (req, res)=>{handler.create(req, res, connection)});
 app.post(properties.paths.read, (req, res)=>{handler.read(req, res, connection)});
 app.post(properties.paths.update, (req, res)=>{handler.update(req, res, connection)});
+app.post(properties.paths.delete, (req, res)=>{handler.delete(req, res, connection)});

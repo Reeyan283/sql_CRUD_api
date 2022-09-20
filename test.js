@@ -29,3 +29,12 @@ exports.update = () => {
         }
     }).then().catch(e=>{console.error(e)});
 }
+
+exports.delete = () => {
+    axios.post("http://localhost:3000/D", {
+        "table": "students",
+        "conditions": {
+            "id": 2
+        }
+    }).then().catch(e=>{console.error(e)});
+}

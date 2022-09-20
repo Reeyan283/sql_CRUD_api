@@ -3,6 +3,7 @@
     "paths": {
         "create": "/C",
         "read": "/R",
-        "update": "/U"
+        "update": "/U",
+        "delete": "/D"
     }
 }

@@ -43,16 +43,28 @@ class queryBuilder {
     update(table, values, conditions) {
         let query = `UPDATE ${table} SET `;
         for (let key in values) {
-            query+=`\`${key}\` = ${values[key]}, `;
+            query+=`\`${key}\` = `;
+            query += (typeof values[key] == "string") ? `"${values[key]}", ` : `${values[key]}, `;
         }
         query = query.substring(0, query.length-2) + " WHERE ";
         for (let key in conditions) {
-            query+=`\`${key}\` = ${conditions[key]}, `;
-            
+            query+=`\`${key}\` = `;
+            query += (typeof conditions[key] == "string") ? `"${conditions[key]}", ` : `${conditions[key]}, `;
         }
         query = query.substring(0, query.length-2) + ";";
 
-        return console.log(query);
+        return query;
+    }
+
+    delete (table, conditions) {
+        let query = `DELETE FROM ${table} WHERE `;
+        for (let key in conditions) {
+            query+=`\`${key}\` = `;
+            query += (typeof conditions[key] == "string") ? `"${conditions[key]}", ` : `${conditions[key]}, `;
+        }
+        query = query.substring(0, query.length-2) + ";";
+
+        return query;
     }
 }
 
